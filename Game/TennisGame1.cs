@@ -11,7 +11,13 @@ public class TennisGame1 : ITennisGame
         Forty = 3,
         Advantage = 4,
     }
-    
+
+    enum CompareScores
+    {
+        Even = 0,
+        Advantage =1,
+        Other = 2
+    }
         private GamePoints m_score1 = GamePoints.Zero;
         private GamePoints m_score2 = GamePoints.Zero;
         private string player1Name;
@@ -51,44 +57,64 @@ public class TennisGame1 : ITennisGame
             string score = "";
             GamePoints tempScore = GamePoints.Zero;
             
-            var scoresAreEven = m_score1 == m_score2;
             
-            if (scoresAreEven)
+            var scoreComparison = getScoreComparation(m_score1,m_score2);
+        
+            if (scoreComparison == CompareScores.Even)
             {
-                score = GetEvenScore();
+                return  GetEvenScore();
             }
-            else if (m_score1 >= GamePoints.Advantage || m_score2 >= GamePoints.Advantage)
+            
+            if (scoreComparison == CompareScores.Advantage)
             {
-                var minusResult = m_score1 - m_score2;
-                if (minusResult == 1) score = _advantagePlayer1;
-                else if (minusResult == -1) score = _advantagePlayer2;
-                else if (minusResult >= 2) score = _winForPlayer1;
-                else score = _winForPlayer2;
+                return GetAdvantageScore();
             }
-            else
+
+            for (var i = 1; i < 3; i++)
             {
-                for (var i = 1; i < 3; i++)
+                if (i == 1) tempScore = m_score1;
+                else { score += "-"; tempScore = m_score2; }
+                switch (tempScore)
                 {
-                    if (i == 1) tempScore = m_score1;
-                    else { score += "-"; tempScore = m_score2; }
-                    switch (tempScore)
-                    {
-                        case GamePoints.Zero:
-                            score += _score;
-                            break;
-                        case GamePoints.Fifteen:
-                            score += _fifteen;
-                            break;
-                        case GamePoints.Thirty:
-                            score += _thirty;
-                            break;
-                        case GamePoints.Forty:
-                            score += _forty;
-                            break;
-                    }
+                    case GamePoints.Zero:
+                        score += _score;
+                        break;
+                    case GamePoints.Fifteen:
+                        score += _fifteen;
+                        break;
+                    case GamePoints.Thirty:
+                        score += _thirty;
+                        break;
+                    case GamePoints.Forty:
+                        score += _forty;
+                        break;
                 }
             }
+
             return score;
+        }
+
+        private string GetAdvantageScore()
+        {
+            string score;
+            var minusResult = m_score1 - m_score2;
+            if (minusResult == 1) score = _advantagePlayer1;
+            else if (minusResult == -1) score = _advantagePlayer2;
+            else if (minusResult >= 2) score = _winForPlayer1;
+            else score = _winForPlayer2;
+
+            return score;
+        }
+
+        private CompareScores getScoreComparation(GamePoints mScore1, GamePoints mScore2)
+        {
+            if (m_score1 == m_score2)
+                return CompareScores.Even;
+
+            if (m_score1 >= GamePoints.Advantage || m_score2 >= GamePoints.Advantage)
+                return CompareScores.Advantage;
+            
+            return CompareScores.Other;
         }
 
         private string GetEvenScore()
