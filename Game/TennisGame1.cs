@@ -50,24 +50,12 @@ public class TennisGame1 : ITennisGame
         {
             string score = "";
             GamePoints tempScore = GamePoints.Zero;
-            if (m_score1 == m_score2)
+            
+            var scoresAreEven = m_score1 == m_score2;
+            
+            if (scoresAreEven)
             {
-                switch (m_score1)
-                {
-                    case GamePoints.Zero:
-                        score = _loveAll;
-                        break;
-                    case GamePoints.Fifteen:
-                        score = _fifteenAll;
-                        break;
-                    case GamePoints.Thirty:
-                        score = _thirtyAll;
-                        break;
-                    default:
-                        score = _deuce;
-                        break;
-
-                }
+                score = GetEvenScore();
             }
             else if (m_score1 >= GamePoints.Advantage || m_score2 >= GamePoints.Advantage)
             {
@@ -100,6 +88,28 @@ public class TennisGame1 : ITennisGame
                     }
                 }
             }
+            return score;
+        }
+
+        private string GetEvenScore()
+        {
+            string score;
+            switch (m_score1)
+            {
+                case GamePoints.Zero:
+                    score = _loveAll;
+                    break;
+                case GamePoints.Fifteen:
+                    score = _fifteenAll;
+                    break;
+                case GamePoints.Thirty:
+                    score = _thirtyAll;
+                    break;
+                default:
+                    score = _deuce;
+                    break;
+            }
+
             return score;
         }
 }
