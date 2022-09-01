@@ -2,8 +2,18 @@ namespace TennisKata;
 
 public class TennisGame1 : ITennisGame
 {
-        private int m_score1 = 0;
-        private int m_score2 = 0;
+
+    enum GamePoints
+    {
+        Zero = 0,
+        Fifteen = 1,
+        Thirty = 2,
+        Forty = 3,
+        Advantage = 4,
+    }
+    
+        private GamePoints m_score1 = GamePoints.Zero;
+        private GamePoints m_score2 = GamePoints.Zero;
         private string player1Name;
         private string player2Name;
        
@@ -39,18 +49,18 @@ public class TennisGame1 : ITennisGame
         public string GetScore()
         {
             string score = "";
-            var tempScore = 0;
+            GamePoints tempScore = GamePoints.Zero;
             if (m_score1 == m_score2)
             {
                 switch (m_score1)
                 {
-                    case 0:
+                    case GamePoints.Zero:
                         score = _loveAll;
                         break;
-                    case 1:
+                    case GamePoints.Fifteen:
                         score = _fifteenAll;
                         break;
-                    case 2:
+                    case GamePoints.Thirty:
                         score = _thirtyAll;
                         break;
                     default:
@@ -59,7 +69,7 @@ public class TennisGame1 : ITennisGame
 
                 }
             }
-            else if (m_score1 >= 4 || m_score2 >= 4)
+            else if (m_score1 >= GamePoints.Advantage || m_score2 >= GamePoints.Advantage)
             {
                 var minusResult = m_score1 - m_score2;
                 if (minusResult == 1) score = _advantagePlayer1;
@@ -75,16 +85,16 @@ public class TennisGame1 : ITennisGame
                     else { score += "-"; tempScore = m_score2; }
                     switch (tempScore)
                     {
-                        case 0:
+                        case GamePoints.Zero:
                             score += _score;
                             break;
-                        case 1:
+                        case GamePoints.Fifteen:
                             score += _fifteen;
                             break;
-                        case 2:
+                        case GamePoints.Thirty:
                             score += _thirty;
                             break;
-                        case 3:
+                        case GamePoints.Forty:
                             score += _forty;
                             break;
                     }
