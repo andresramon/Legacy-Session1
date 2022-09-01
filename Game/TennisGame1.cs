@@ -6,6 +6,20 @@ public class TennisGame1 : ITennisGame
         private int m_score2 = 0;
         private string player1Name;
         private string player2Name;
+       
+        private string _player1 = "player1";
+        private string _loveAll = "Love-All";
+        private string _fifteenAll = "Fifteen-All";
+        private string _thirtyAll = "Thirty-All";
+        private string _deuce = "Deuce";
+        private string _advantagePlayer1 = "Advantage player1";
+        private string _advantagePlayer2 = "Advantage player2";
+        private string _winForPlayer1 = "Win for player1";
+        private string _winForPlayer2 = "Win for player2";
+        private string _score = "Love";
+        private string _fifteen = "Fifteen";
+        private string _thirty = "Thirty";
+        private string _forty = "Forty";
 
         public TennisGame1(string player1Name, string player2Name)
         {
@@ -15,7 +29,7 @@ public class TennisGame1 : ITennisGame
 
         public void WonPoint(string playerName)
         {
-            if (playerName == "player1")
+            if (playerName == _player1)
                 m_score1 += 1;
             else
                 m_score2 += 1;
@@ -30,16 +44,16 @@ public class TennisGame1 : ITennisGame
                 switch (m_score1)
                 {
                     case 0:
-                        score = "Love-All";
+                        score = _loveAll;
                         break;
                     case 1:
-                        score = "Fifteen-All";
+                        score = _fifteenAll;
                         break;
                     case 2:
-                        score = "Thirty-All";
+                        score = _thirtyAll;
                         break;
                     default:
-                        score = "Deuce";
+                        score = _deuce;
                         break;
 
                 }
@@ -47,10 +61,10 @@ public class TennisGame1 : ITennisGame
             else if (m_score1 >= 4 || m_score2 >= 4)
             {
                 var minusResult = m_score1 - m_score2;
-                if (minusResult == 1) score = "Advantage player1";
-                else if (minusResult == -1) score = "Advantage player2";
-                else if (minusResult >= 2) score = "Win for player1";
-                else score = "Win for player2";
+                if (minusResult == 1) score = _advantagePlayer1;
+                else if (minusResult == -1) score = _advantagePlayer2;
+                else if (minusResult >= 2) score = _winForPlayer1;
+                else score = _winForPlayer2;
             }
             else
             {
@@ -61,16 +75,16 @@ public class TennisGame1 : ITennisGame
                     switch (tempScore)
                     {
                         case 0:
-                            score += "Love";
+                            score += _score;
                             break;
                         case 1:
-                            score += "Fifteen";
+                            score += _fifteen;
                             break;
                         case 2:
-                            score += "Thirty";
+                            score += _thirty;
                             break;
                         case 3:
-                            score += "Forty";
+                            score += _forty;
                             break;
                     }
                 }
