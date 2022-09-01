@@ -2,7 +2,7 @@ namespace TennisKata;
 
 public class TennisGame1 : ITennisGame
 {
-     private int m_score1 = 0;
+        private int m_score1 = 0;
         private int m_score2 = 0;
         private string player1Name;
         private string player2Name;
@@ -20,6 +20,7 @@ public class TennisGame1 : ITennisGame
         private string _fifteen = "Fifteen";
         private string _thirty = "Thirty";
         private string _forty = "Forty";
+        private string _player2 = "player2";
 
         public TennisGame1(string player1Name, string player2Name)
         {
@@ -31,7 +32,7 @@ public class TennisGame1 : ITennisGame
         {
             if (playerName == _player1)
                 m_score1 += 1;
-            else
+            else if (playerName == _player2)
                 m_score2 += 1;
         }
 
