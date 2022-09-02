@@ -28,23 +28,23 @@ public class TennisGame1 : ITennisGame
     }
         private GamePoints m_score1 = GamePoints.Love;
         private GamePoints m_score2 = GamePoints.Love;
-        private string player1Name;
-        private string player2Name;
+        private readonly string player1Name;
+        private readonly string player2Name;
        
-        private string _player1 = "player1";
-        private string _loveAll = "Love-All";
-        private string _fifteenAll = "Fifteen-All";
-        private string _thirtyAll = "Thirty-All";
-        private string _deuce = "Deuce";
-        private string _advantagePlayer1 = "Advantage player1";
-        private string _advantagePlayer2 = "Advantage player2";
-        private string _winForPlayer1 = "Win for player1";
-        private string _winForPlayer2 = "Win for player2";
-        private string _score = "Love";
-        private string _fifteen = "Fifteen";
-        private string _thirty = "Thirty";
-        private string _forty = "Forty";
-        private string _player2 = "player2";
+        private readonly string _player1 = "player1";
+        private readonly string _loveAll = "Love-All";
+        private readonly string _fifteenAll = "Fifteen-All";
+        private readonly string _thirtyAll = "Thirty-All";
+        private readonly string _deuce = "Deuce";
+        private readonly string _advantagePlayer1 = "Advantage player1";
+        private readonly string _advantagePlayer2 = "Advantage player2";
+        private readonly string _winForPlayer1 = "Win for player1";
+        private readonly string _winForPlayer2 = "Win for player2";
+        private readonly string _score = "Love";
+        private readonly string _fifteen = "Fifteen";
+        private readonly string _thirty = "Thirty";
+        private readonly string _forty = "Forty";
+        private readonly string _player2 = "player2";
 
         public TennisGame1(string player1Name, string player2Name)
         {
