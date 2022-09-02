@@ -20,14 +20,17 @@ namespace TennisKata;
         public string GetScore()
         {
             var score = "";
+            if (WinPlayer(p1point, p2point))
+            {
+                return "Win for player1";
+            }
+            if (WinPlayer(p2point, p1point))
+            {
+                return "Win for player2";
+            }
             if (p1point == p2point && p1point < 3)
             {
-                if (p1point == 0)
-                    score = "Love";
-                if (p1point == 1)
-                    score = "Fifteen";
-                if (p1point == 2)
-                    score = "Thirty";
+                score = TranslateScore(p1point);
                 score += "-All";
             }
             if (p1point == p2point && p1point > 2)
@@ -35,51 +38,27 @@ namespace TennisKata;
 
             if (p1point > 0 && p2point == 0)
             {
-                if (p1point == 1)
-                    p1res = "Fifteen";
-                if (p1point == 2)
-                    p1res = "Thirty";
-                if (p1point == 3)
-                    p1res = "Forty";
-
+                p1res = TranslateScore(p1point);
                 p2res = "Love";
                 score = p1res + "-" + p2res;
             }
             if (p2point > 0 && p1point == 0)
             {
-                if (p2point == 1)
-                    p2res = "Fifteen";
-                if (p2point == 2)
-                    p2res = "Thirty";
-                if (p2point == 3)
-                    p2res = "Forty";
-
+                p2res = TranslateScore(p2point);
                 p1res = "Love";
                 score = p1res + "-" + p2res;
             }
 
             if (p1point > p2point && p1point < 4)
             {
-                if (p1point == 2)
-                    p1res = "Thirty";
-                if (p1point == 3)
-                    p1res = "Forty";
-                if (p2point == 1)
-                    p2res = "Fifteen";
-                if (p2point == 2)
-                    p2res = "Thirty";
+                p1res = TranslateScore(p1point);
+                p2res = TranslateScore(p2point);
                 score = p1res + "-" + p2res;
             }
             if (p2point > p1point && p2point < 4)
             {
-                if (p2point == 2)
-                    p2res = "Thirty";
-                if (p2point == 3)
-                    p2res = "Forty";
-                if (p1point == 1)
-                    p1res = "Fifteen";
-                if (p1point == 2)
-                    p1res = "Thirty";
+                p2res = TranslateScore(p2point);
+                p1res = TranslateScore(p1point);
                 score = p1res + "-" + p2res;
             }
 
@@ -93,20 +72,19 @@ namespace TennisKata;
                 score = "Advantage player2";
             }
 
-            if (WinPlayer(p1point, p2point))
-            {
-                score = "Win for player1";
-            }
-            if (WinPlayer(p2point, p1point))
-            {
-                score = "Win for player2";
-            }
+            
             return score;
         }
 
         private bool WinPlayer(int point1, int point2)
         {
             return point1 >= 4 && point2 >= 0 && (point1 - point2) >= 2;
+        }
+
+        private string TranslateScore(int point)
+        {
+            IDictionary<int, string> dictScores = new Dictionary<int, string>() { {0, "Love"}, {1, "Fifteen"}, {2, "Thirty"}, {3, "Forty"} };
+            return dictScores[point];
         }
         public void SetP1Score(int number)
         {
