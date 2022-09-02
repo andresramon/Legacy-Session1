@@ -9,7 +9,7 @@ namespace TennisKata;
         private string p2res = "";
         private string player1Name;
         private string player2Name;
-
+        
         public TennisGame2(string player1Name, string player2Name)
         {
             this.player1Name = player1Name;
@@ -93,17 +93,21 @@ namespace TennisKata;
                 score = "Advantage player2";
             }
 
-            if (p1point >= 4 && p2point >= 0 && (p1point - p2point) >= 2)
+            if (WinPlayer(p1point, p2point))
             {
                 score = "Win for player1";
             }
-            if (p2point >= 4 && p1point >= 0 && (p2point - p1point) >= 2)
+            if (WinPlayer(p2point, p1point))
             {
                 score = "Win for player2";
             }
             return score;
         }
 
+        private bool WinPlayer(int point1, int point2)
+        {
+            return point1 >= 4 && point2 >= 0 && (point1 - point2) >= 2;
+        }
         public void SetP1Score(int number)
         {
             for (int i = 0; i < number; i++)
