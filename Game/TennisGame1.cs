@@ -55,9 +55,13 @@ public class TennisGame1 : ITennisGame
         public void WonPoint(string playerName)
         {
             if (playerName == _player1)
+            {
                 m_score1 += 1;
+            }
             else if (playerName == _player2)
+            {
                 m_score2 += 1;
+            }
         }
 
         public string GetScore()
@@ -80,7 +84,7 @@ public class TennisGame1 : ITennisGame
 
         private string GetOtherScore()
         {
-            return m_score1  + "-" + m_score2;
+            return String.Concat(m_score1, "-",m_score2);
         }
 
         private string GetAdvantageScore()
@@ -88,15 +92,18 @@ public class TennisGame1 : ITennisGame
             
             AdvantagePoints minusResult =  (AdvantagePoints) (m_score1 - m_score2) ;
           
-            if (minusResult == AdvantagePoints.AdvantagePlayerOne) 
+            if (minusResult == AdvantagePoints.AdvantagePlayerOne)
+            {
                 return _advantagePlayer1;
-            
+            }
             if (minusResult == AdvantagePoints.AdvantagePlayerTwo )
+            {
                 return _advantagePlayer2;
-            
-            if (minusResult >= AdvantagePoints.WinPlayerOne) 
+            }
+            if (minusResult >= AdvantagePoints.WinPlayerOne)
+            {
                 return _winForPlayer1;
-          
+            }
             return _winForPlayer2;
             
         }
@@ -104,11 +111,14 @@ public class TennisGame1 : ITennisGame
         private CompareScores GetScoreComparation(GamePoints mScore1, GamePoints mScore2)
         {
             if (m_score1 == m_score2)
+            {
                 return CompareScores.Even;
-
-            if (m_score1 >= GamePoints.Advantage || m_score2 >= GamePoints.Advantage)
-                return CompareScores.Advantage;
+            }
             
+            if (m_score1 >= GamePoints.Advantage || m_score2 >= GamePoints.Advantage)
+            {
+                return CompareScores.Advantage;
+            }
             return CompareScores.Other;
         }
 
