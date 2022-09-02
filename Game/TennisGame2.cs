@@ -28,27 +28,42 @@ namespace TennisKata;
             {
                 return "Win for player2";
             }
-            if (p1point > p2point && p2point >= 3)
+            if (AdvantagePlayer(p1point, p2point))
             {
                 return "Advantage player1";
             }
 
-            if (p2point > p1point && p1point >= 3)
+            if (AdvantagePlayer(p2point, p1point))
             {
                 return "Advantage player2";
             }
-            if (p1point == p2point && p1point < 3)
+            if (EqualsScore(p1point, p2point))
             {
+                if (p1point < 3)
+                {
+                    return String.Concat(TranslateScore(p1point), "-All") ;    
+                }
+
+                if (p1point > 2)
+                {
+                    return "Deuce";
+                }
                 
-                return String.Concat(TranslateScore(p1point), "-All") ;
             }
-            if (p1point == p2point && p1point > 2)
-                return "Deuce";
-            
+           
             p1res = TranslateScore(p1point);
             p2res = TranslateScore(p2point);
-            return p1res + "-" + p2res;
+            return String.Concat(p1res, "-", p2res);
             
+        }
+
+        private bool EqualsScore(int point1, int point2)
+        {
+            return point1 == point2;
+        }
+        private bool AdvantagePlayer(int point1, int point2)
+        {
+            return point1 > point2 && point2 >= 3;
         }
 
         private bool WinPlayer(int point1, int point2)
