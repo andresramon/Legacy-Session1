@@ -19,7 +19,7 @@ namespace TennisKata;
 
         public string GetScore()
         {
-            var score = "";
+           
             if (WinPlayer(p1point, p2point))
             {
                 return "Win for player1";
@@ -28,52 +28,27 @@ namespace TennisKata;
             {
                 return "Win for player2";
             }
-            if (p1point == p2point && p1point < 3)
-            {
-                score = TranslateScore(p1point);
-                score += "-All";
-            }
-            if (p1point == p2point && p1point > 2)
-                score = "Deuce";
-
-            if (p1point > 0 && p2point == 0)
-            {
-                p1res = TranslateScore(p1point);
-                p2res = "Love";
-                score = p1res + "-" + p2res;
-            }
-            if (p2point > 0 && p1point == 0)
-            {
-                p2res = TranslateScore(p2point);
-                p1res = "Love";
-                score = p1res + "-" + p2res;
-            }
-
-            if (p1point > p2point && p1point < 4)
-            {
-                p1res = TranslateScore(p1point);
-                p2res = TranslateScore(p2point);
-                score = p1res + "-" + p2res;
-            }
-            if (p2point > p1point && p2point < 4)
-            {
-                p2res = TranslateScore(p2point);
-                p1res = TranslateScore(p1point);
-                score = p1res + "-" + p2res;
-            }
-
             if (p1point > p2point && p2point >= 3)
             {
-                score = "Advantage player1";
+                return "Advantage player1";
             }
 
             if (p2point > p1point && p1point >= 3)
             {
-                score = "Advantage player2";
+                return "Advantage player2";
             }
-
+            if (p1point == p2point && p1point < 3)
+            {
+                
+                return String.Concat(TranslateScore(p1point), "-All") ;
+            }
+            if (p1point == p2point && p1point > 2)
+                return "Deuce";
             
-            return score;
+            p1res = TranslateScore(p1point);
+            p2res = TranslateScore(p2point);
+            return p1res + "-" + p2res;
+            
         }
 
         private bool WinPlayer(int point1, int point2)
